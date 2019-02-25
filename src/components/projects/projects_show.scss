@@ -1,0 +1,89 @@
+@import '../../styles/def';
+
+.project {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-start;
+  @include for-phone {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.project-side {
+  flex: 0 0 33%;
+  padding: 0 0 0 1rem;
+  @include for-phone {
+    flex: 1 0 100%;
+    padding: 0 0 1rem;
+  }
+}
+
+.project-main {
+  flex-grow: 1;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 450ms ease;
+
+  .loaded & {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.project-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: 0;
+  transition: opacity 500ms ease;
+
+  .project.loaded & {
+    opacity: 1;
+  }
+}
+
+.skills {
+  padding: 1rem 0;
+}
+
+.tasks {
+  padding: 1rem 0 0;
+}
+
+.tag {
+  background: lighten($bg, 3%);
+  color: $text2;
+  padding: 0 0.75rem;
+  line-height: 2.15;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.desc {
+  padding: 0.5rem 0 0;
+  p {
+    margin: 0;
+    line-height: 1;
+  }
+}
+
+.companies {
+  overflow: hidden;
+  padding: 1rem 0 0.5rem;
+  font-size: 0.9rem;
+
+  .comp {
+    float: left;
+    line-height: 1;
+    margin-right: 0.5rem;
+
+    .name {
+      color: $text2;
+    }
+  }
+}

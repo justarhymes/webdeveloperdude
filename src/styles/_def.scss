@@ -1,0 +1,40 @@
+/*******************
+* Variables
+*******************/
+$white: #fff;
+
+// colors
+$pink: #e643e0;
+$blue: #43d1e6;
+$orange: #db9f67;
+
+$bg: #282c34;
+$text: #abb2bf;
+$text2: #5c6370;
+
+//sizes
+$tablet: 1040px;
+$large-mobile: 760px;
+$small-mobile: 380px;
+$extra-small-mobile: 300px;
+
+@mixin for-tablet {
+  @media (max-width: $tablet) {
+    @content;
+  }
+}
+@mixin for-phone {
+  @media (max-width: $large-mobile) {
+    @content;
+  }
+}
+@mixin for-small-phone {
+  @media (max-width: $small-mobile) {
+    @content;
+  }
+}
+@mixin for-extra-small-phone {
+  @media (max-width: $extra-small-mobile) {
+    @content;
+  }
+}

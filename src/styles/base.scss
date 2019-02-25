@@ -1,0 +1,124 @@
+@import '~normalize.css/normalize.css';
+@import 'def';
+
+html {
+  font-size: 100%;
+  box-sizing: border-box;
+  @include for-tablet {
+    font-size: 90%;
+  }
+  @include for-phone {
+    font-size: 85%;
+  }
+  @include for-small-phone {
+    font-size: 80%;
+  }
+  @include for-extra-small-phone {
+    font-size: 75%;
+  }
+}
+*,
+:after,
+:before {
+  box-sizing: inherit;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: Hack, monospace;
+  font-weight: 400;
+  font-feature-settings: "calt" 1;
+  text-rendering: optimizeLegibility;
+  background: $bg;
+  color: $text;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Hack, monospace;
+  font-weight: 400;
+  margin: 0;
+}
+
+h1 {
+  font-size: 1.45rem;
+
+  a, a:hover, a:active, a:focus {
+    color: $text;
+  }
+}
+
+a {
+  color: $orange;
+  text-decoration: none;
+  outline: 0;
+
+  &:hover, &:focus, &:active {
+    color: darken($orange, 10%);
+  }
+}
+
+h2 {
+  font-size: 1.25rem;
+
+  &.comment {
+    margin-bottom: 0.75rem;
+  }
+}
+
+h3 {
+  font-size: 1rem;
+
+  &.comment {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.pink {
+  color: $pink;
+}
+
+.blue {
+  color: $blue;
+}
+
+.comment {
+  color: $text2;
+
+  &:before {
+    content: '//';
+    display: inline-block;
+    margin-right: 0.15rem;
+  }
+}
+
+.string {
+  &:before,
+  &:after {
+    content: "\"";
+    display: inline-block;
+  }
+}
+
+.inline {
+  display: block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+
+  li {
+    display: block;
+    float: left;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+
+    &:last-child {
+      margin-right: 0;
+
+      &:first-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

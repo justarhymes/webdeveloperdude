@@ -1,0 +1,75 @@
+@import '../../styles/def';
+
+.projects {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 0.5rem;
+
+  .other-projects-title {
+    padding: 2rem 0.5rem 0;
+  }
+}
+
+.project-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  .project-grid-item {
+    width: 25%;
+    padding: 0.5rem;
+    @include for-tablet {
+      width: 33%;
+    }
+    @include for-phone {
+      width: 50%;
+    }
+  }
+}
+
+.site-name {
+  margin: 0 0 0.3rem;
+}
+.site-meta {
+  display: flex;
+  justify-content: space-between;
+  @include for-phone {
+    display: block;
+    > span {
+      display: block;
+    }
+  }
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba($bg, 0.75);
+  opacity: 0;
+  transition: opacity 300ms ease;
+
+  span {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translate3d(0,-80%,0);
+    opacity: 0;
+    transition: all 300ms 300ms ease;
+    color: $white;
+    text-align: center;
+    font-size: 0.75rem;
+  }
+
+  &:hover {
+    opacity: 1;
+    span {
+      transform: translate3d(0,-50%,0);
+      opacity: 1;
+    }
+  }
+}
