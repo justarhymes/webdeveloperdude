@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AnimateHeight from 'react-animate-height';
 import ImagesLoaded from 'react-images-loaded';
-import slugReplace from '../../utils/slugNames.js';
+import slugReplace from '../../utils/slugNames';
+import removeHttp from '../../utils/removeHttp';
 import { fetchProject } from '../../actions';
 import Card from './Card';
 import './projects_show.scss';
@@ -12,7 +13,8 @@ class ProjectsShow extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      height: 0
+      height: 0,
+      activeImage: '/page01.jpg'
     };
   }
 
@@ -75,6 +77,65 @@ class ProjectsShow extends Component {
     }
   }
 
+  renderSecondaryUrl(secondLink) {
+    if (secondLink && secondLink.url) {
+      return (
+        <span>or <a href={secondLink.url} title={`visit ${removeHttp(secondLink.url)}`} target="new">{ removeHttp(secondLink.url) }</a></span>
+      );
+    }
+  }
+
+  renderURLBlock(project) {
+    if (project.website_link && project.website_link.url) {
+      return (
+        <div className="links">
+          Vist <a href={project.website_link.url} title={`visit ${removeHttp(project.website_link.url)}`} target="_blank" rel="noopener noreferrer">
+            { removeHttp(project.website_link.url) }
+          </a> { this.renderSecondaryUrl(project.secondary_link) }
+        </div>
+      );
+    }
+
+  }
+
+  thumbnailClick(count) {
+    this.setState({
+      activeImage: `/page0${count}.jpg`
+    });
+  }
+
+  renderGalleryThumbnail(galleryCount, abbreviation) {
+    let galleryThumbs = []
+    for (let i = 1; i <= galleryCount; i++) {
+      galleryThumbs.push(
+        <div
+          key={`gallery-${i}`}
+          onClick={ () => { this.thumbnailClick(i) } }
+          className="screen-gallery-thumb"
+        >
+          <img
+            src={`https://s3-us-west-1.amazonaws.com/webdevdude/images/${abbreviation}/page0${i}.jpg`}
+            className="small-project-image"
+            alt="thumbnail"
+          />
+        </div>
+      );
+    }
+    return galleryThumbs;
+  }
+
+  renderGalleryIfAvailable(project) {
+    if (project.gallery_count && project.gallery_count > 1) {
+      return (
+        <div
+          className="screen-gallery"
+        >
+          { this.renderGalleryThumbnail(project.gallery_count, project.abbreviation) }
+        </div>
+      );
+    }
+  }
+
   loadProject = () => {
     const { height } = this.state;
 
@@ -115,17 +176,16 @@ class ProjectsShow extends Component {
                   { this.renderTagItem(project.data.project_skills, 'skills') }
                 </ul>
               </div>
-              <div className="links" ng-if="project.url.length">
-                Vist <a href="http://url.com" title="visit url.com" target="new">url.com</a> <span ng-if="project.secondaryurl.length">or <a href="http://secondurl.com" title="visit secondurl.com" target="new">secondurl.com</a></span>
-              </div>
+              { this.renderURLBlock(project.data) }
             </aside>
 
             <div className="project-main">
               <img
-                src={`https://s3-us-west-1.amazonaws.com/webdevdude/images/${project.data.abbreviation}/page01.jpg`}
+                src={`https://s3-us-west-1.amazonaws.com/webdevdude/images/${project.data.abbreviation}${this.state.activeImage}`}
                 className="project-image"
-                alt="{project.data.title[0].text} website"
+                alt={`${project.data.title[0].text} website`}
               />
+              { this.renderGalleryIfAvailable(project.data) }
               <div className="tasks">
                 <h3 className="comment">Tasks completed</h3>
                 <ul className="inline">

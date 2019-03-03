@@ -10,7 +10,7 @@ export const fetchProjects = () => async dispatch => {
 
   const resp = await api.query(
     Prismic.Predicates.at('document.type', 'projects'),
-    { orderings : '[document.first_publication_date desc]' }
+    { orderings : '[my.projects.dip_id desc]' }
   );
 
   dispatch({

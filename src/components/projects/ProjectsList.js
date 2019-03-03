@@ -40,7 +40,7 @@ class ProjectsList extends Component {
         return (
           <article className="project-grid-item" key={`${singleProject.slug}-${singleProject.id}`}>
             <Card>
-              <img src={`https://s3-us-west-1.amazonaws.com/webdevdude/images/${singleProject.data.abbreviation}/thumb.jpg`} alt="{singleProject.data.title[0].text} project" />
+              <img src={`https://s3-us-west-1.amazonaws.com/webdevdude/images/${singleProject.data.abbreviation}/thumb.jpg`} alt={`${singleProject.data.title[0].text} project`} />
               <div className="card-about wrapper">
                 <h3 className="site-name">{singleProject.data.title[0].text}</h3>
                 <div className="site-meta">
@@ -54,7 +54,7 @@ class ProjectsList extends Component {
             </Card>
           </article>
         );
-      });  
+      });
     }
   }
 
