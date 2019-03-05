@@ -13,8 +13,13 @@
   transition: all 400ms ease;
   color: $text;
 
-  &:hover {
-    transform: scale(9.7);
+  .loaded & {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+
+    &:hover {
+      transform: translate3d(0, 0, 0) scale(0.97);
+    }
   }
 
   .wrapper {
@@ -27,11 +32,6 @@
     flex-direction: column;
     justify-content: space-between;
     min-height: 85px;
-  }
-
-  .loaded & {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
   }
 
   &.page {
