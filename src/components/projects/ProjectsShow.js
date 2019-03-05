@@ -23,6 +23,16 @@ class ProjectsShow extends Component {
     this.props.fetchProject(slug);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.match.params.slug !== this.props.match.params.slug) {
+      if (this.state.activeImage !== '/page01.jpg') {
+        this.setState({
+          activeImage: '/page01.jpg'
+        });  
+      }
+    }
+  }
+
   _toggleHeight = () => {
     const { height } = this.state;
 
